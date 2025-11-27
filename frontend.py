@@ -196,7 +196,7 @@ def main():
             "Your Name",
             value="",
             key="name",
-            placeholder="Dr. Jane Researcher"
+            placeholder="Mr Induj Gupta"
         )
         
         interests_input = st.text_area(
@@ -297,13 +297,13 @@ def main():
         
         # Generate Button
         generate_btn = st.button(
-            "🚀 Generate Recommendations",
+            " Generate Recommendations",
             type="primary",
             use_container_width=True
         )
         
         # Clear Button
-        if st.button("🗑️ Clear Results", use_container_width=True):
+        if st.button(" Clear Results", use_container_width=True):
             st.session_state.recommendations = None
             st.rerun()
     
@@ -311,12 +311,12 @@ def main():
     if generate_btn:
         # Validate inputs
         if not keywords_input or not keywords_input.strip():
-            st.error("❌ Please enter at least one keyword for search.")
+            st.error(" Please enter at least one keyword for search.")
             return
         
         keywords = [k.strip() for k in keywords_input.split(',') if k.strip()]
         if not keywords:
-            st.error("❌ Please enter valid keywords (comma-separated).")
+            st.error(" Please enter valid keywords (comma-separated).")
             return
         
         # Create user profile
@@ -330,7 +330,7 @@ def main():
             }
         
         # Initialize client and recommender
-        with st.spinner("🔄 Initializing recommendation engine..."):
+        with st.spinner("Initializing recommendation engine..."):
             client = SemanticScholarClient(
                 api_key=api_key if api_key else None,
                 requests_per_second=5.0,
@@ -346,7 +346,7 @@ def main():
         status_text = st.empty()
         
         try:
-            status_text.text("🔍 Searching for papers...")
+            status_text.text(" Searching for papers...")
             progress_bar.progress(10)
             
             recommendations = recommender.build_personalized_recommendations(
@@ -355,7 +355,7 @@ def main():
             )
             
             progress_bar.progress(100)
-            status_text.text("✅ Recommendations generated successfully!")
+            status_text.text("Recommendations generated successfully!")
             
             st.session_state.recommendations = recommendations
             st.session_state.user_profile = user_profile
@@ -369,7 +369,7 @@ def main():
         except Exception as e:
             progress_bar.empty()
             status_text.empty()
-            st.error(f"❌ Error generating recommendations: {str(e)}")
+            st.error(f" Error generating recommendations: {str(e)}")
             st.exception(e)
             st.session_state.processing = False
             return
@@ -423,7 +423,7 @@ def main():
         
         csv_string = df.to_csv(index=False)
         st.download_button(
-            label="📄 Download CSV",
+            label="Download CSV",
             data=csv_string,
             file_name=f"mentoredge_recommendations_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
             mime="text/csv",
@@ -471,12 +471,12 @@ def main():
     else:
         # Welcome message
         st.info("""
-        👋 **Welcome to MentorEdge!**
+         **Welcome to MentorEdge!**
         
         Get started by:
-        1. 📝 Enter your research interests and keywords in the sidebar
-        2. ⚙️ Configure your preferences (min year, scoring weights)
-        3. 🚀 Click "Generate Recommendations" to get personalized paper suggestions
+        1.  Enter your research interests and keywords in the sidebar
+        2. Configure your preferences (min year, scoring weights)
+        3.  Click "Generate Recommendations" to get personalized paper suggestions
         
         The system will search for papers matching your keywords and rank them based on:
         - **Relevance**: How well they match your search terms
@@ -485,7 +485,7 @@ def main():
         """)
         
         # Example profile
-        with st.expander("📖 See Example Configuration"):
+        with st.expander("See Example Configuration"):
             st.markdown("""
             **Name:** Dr. Jane Researcher
             
